@@ -1,0 +1,401 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="IELTSOnlineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AddressInfo">
+          <Key>
+            <PropertyRef Name="AddressID" />
+          </Key>
+          <Property Name="AddressID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_TestInfoID" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="AddressI" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="AddressII" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ZipOrPostalCode" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="14" />
+          <Property Name="MobilePhone" Type="nvarchar" MaxLength="14" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OfficeUse">
+          <Key>
+            <PropertyRef Name="OfficeUseID" />
+          </Key>
+          <Property Name="OfficeUseID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Scheme" Type="nvarchar" MaxLength="255" />
+          <Property Name="TestDate" Type="date" />
+          <Property Name="DateofPayment" Type="datetime" />
+          <Property Name="ReceiptNumber" Type="nvarchar" MaxLength="255" />
+          <Property Name="IDChecked" Type="bit" />
+          <Property Name="AC" Type="bit" />
+          <Property Name="GT" Type="bit" />
+          <Property Name="AdministratorInitials" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="StudentInfo">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_AddressID" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="255" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="255" />
+          <Property Name="DateOfBirth" Type="date" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="14" />
+          <Property Name="IdentityType" Type="nvarchar" MaxLength="12" />
+          <Property Name="IdentityValue" Type="nvarchar" MaxLength="50" />
+          <Property Name="CountryNationalCode" Type="nvarchar" MaxLength="255" />
+          <Property Name="FirstLanguageCode" Type="nvarchar" MaxLength="255" />
+          <Property Name="OccupationSector" Type="nvarchar" MaxLength="255" />
+          <Property Name="OccupationLevel" Type="nvarchar" MaxLength="255" />
+          <Property Name="ApplyingCountry" Type="nvarchar" MaxLength="255" />
+          <Property Name="EnglishLearningLocation" Type="nvarchar" MaxLength="255" />
+          <Property Name="EducationLevel" Type="nvarchar" MaxLength="255" />
+          <Property Name="EnglishLearningPeriod" Type="nvarchar" MaxLength="255" />
+          <Property Name="PermanentDisability" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="TestInfo">
+          <Key>
+            <PropertyRef Name="TestInfoID" />
+          </Key>
+          <Property Name="TestInfoID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReceiptNumber" Type="nvarchar" MaxLength="24" />
+          <Property Name="StudentID" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="OfficeUseID" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="PreferredTestDate" Type="date" />
+          <Property Name="SecondaryTestDate" Type="date" />
+          <Property Name="TestCityLocation" Type="nvarchar" MaxLength="255" />
+          <Property Name="TestModule" Type="nvarchar" MaxLength="255" />
+          <Property Name="TestReason" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ResultCopyTo" Type="bit" />
+          <Property Name="Status" Type="tinyint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedDateTime" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_AddressInfo_TestInfo">
+          <End Role="TestInfo" Type="Self.TestInfo" Multiplicity="0..1" />
+          <End Role="AddressInfo" Type="Self.AddressInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestInfo">
+              <PropertyRef Name="TestInfoID" />
+            </Principal>
+            <Dependent Role="AddressInfo">
+              <PropertyRef Name="FK_TestInfoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentInfo_AddressInfo">
+          <End Role="AddressInfo" Type="Self.AddressInfo" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StudentInfo" Type="Self.StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AddressInfo">
+              <PropertyRef Name="AddressID" />
+            </Principal>
+            <Dependent Role="StudentInfo">
+              <PropertyRef Name="FK_AddressID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestInfo_OfficeUse">
+          <End Role="OfficeUse" Type="Self.OfficeUse" Multiplicity="0..1" />
+          <End Role="TestInfo" Type="Self.TestInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OfficeUse">
+              <PropertyRef Name="OfficeUseID" />
+            </Principal>
+            <Dependent Role="TestInfo">
+              <PropertyRef Name="OfficeUseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestInfo_StudentInfo">
+          <End Role="StudentInfo" Type="Self.StudentInfo" Multiplicity="0..1" />
+          <End Role="TestInfo" Type="Self.TestInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentInfo">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="TestInfo">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="IELTSOnlineModelStoreContainer">
+          <EntitySet Name="AddressInfo" EntityType="Self.AddressInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OfficeUse" EntityType="Self.OfficeUse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentInfo" EntityType="Self.StudentInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TestInfo" EntityType="Self.TestInfo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AddressInfo_TestInfo" Association="Self.FK_AddressInfo_TestInfo">
+            <End Role="TestInfo" EntitySet="TestInfo" />
+            <End Role="AddressInfo" EntitySet="AddressInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentInfo_AddressInfo" Association="Self.FK_StudentInfo_AddressInfo">
+            <End Role="AddressInfo" EntitySet="AddressInfo" />
+            <End Role="StudentInfo" EntitySet="StudentInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestInfo_OfficeUse" Association="Self.FK_TestInfo_OfficeUse">
+            <End Role="OfficeUse" EntitySet="OfficeUse" />
+            <End Role="TestInfo" EntitySet="TestInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestInfo_StudentInfo" Association="Self.FK_TestInfo_StudentInfo">
+            <End Role="StudentInfo" EntitySet="StudentInfo" />
+            <End Role="TestInfo" EntitySet="TestInfo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IELTSOnlineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="IELTSOnlineEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AddressInfoes" EntityType="IELTSOnlineModel.AddressInfo" />
+          <EntitySet Name="OfficeUses" EntityType="IELTSOnlineModel.OfficeUse" />
+          <EntitySet Name="TestInfoes" EntityType="IELTSOnlineModel.TestInfo" />
+          <AssociationSet Name="FK_AddressInfo_TestInfo" Association="IELTSOnlineModel.FK_AddressInfo_TestInfo">
+            <End Role="TestInfo" EntitySet="TestInfoes" />
+            <End Role="AddressInfo" EntitySet="AddressInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestInfo_OfficeUse" Association="IELTSOnlineModel.FK_TestInfo_OfficeUse">
+            <End Role="OfficeUse" EntitySet="OfficeUses" />
+            <End Role="TestInfo" EntitySet="TestInfoes" />
+          </AssociationSet>
+          <EntitySet Name="StudentInfoes" EntityType="IELTSOnlineModel.StudentInfo" />
+          <AssociationSet Name="FK_StudentInfo_AddressInfo" Association="IELTSOnlineModel.FK_StudentInfo_AddressInfo">
+            <End Role="AddressInfo" EntitySet="AddressInfoes" />
+            <End Role="StudentInfo" EntitySet="StudentInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestInfo_StudentInfo" Association="IELTSOnlineModel.FK_TestInfo_StudentInfo">
+            <End Role="StudentInfo" EntitySet="StudentInfoes" />
+            <End Role="TestInfo" EntitySet="TestInfoes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AddressInfo">
+          <Key>
+            <PropertyRef Name="AddressID" />
+          </Key>
+          <Property Name="AddressID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_TestInfoID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="AddressI" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="AddressII" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ZipOrPostalCode" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="Telephone" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="MobilePhone" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TestInfo" Relationship="IELTSOnlineModel.FK_AddressInfo_TestInfo" FromRole="AddressInfo" ToRole="TestInfo" />
+          <NavigationProperty Name="StudentInfoes" Relationship="IELTSOnlineModel.FK_StudentInfo_AddressInfo" FromRole="AddressInfo" ToRole="StudentInfo" />
+        </EntityType>
+        <EntityType Name="OfficeUse">
+          <Key>
+            <PropertyRef Name="OfficeUseID" />
+          </Key>
+          <Property Name="OfficeUseID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Scheme" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TestDate" Type="DateTime" Precision="0" />
+          <Property Name="DateofPayment" Type="DateTime" Precision="3" />
+          <Property Name="ReceiptNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IDChecked" Type="Boolean" />
+          <Property Name="AC" Type="Boolean" />
+          <Property Name="GT" Type="Boolean" />
+          <Property Name="AdministratorInitials" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TestInfoes" Relationship="IELTSOnlineModel.FK_TestInfo_OfficeUse" FromRole="OfficeUse" ToRole="TestInfo" />
+        </EntityType>
+        <EntityType Name="TestInfo">
+          <Key>
+            <PropertyRef Name="TestInfoID" />
+          </Key>
+          <Property Name="TestInfoID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReceiptNumber" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <Property Name="StudentID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="OfficeUseID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="PreferredTestDate" Type="DateTime" Precision="0" />
+          <Property Name="SecondaryTestDate" Type="DateTime" Precision="0" />
+          <Property Name="TestCityLocation" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TestModule" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TestReason" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ResultCopyTo" Type="Boolean" />
+          <Property Name="Status" Type="Byte" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AddressInfoes" Relationship="IELTSOnlineModel.FK_AddressInfo_TestInfo" FromRole="TestInfo" ToRole="AddressInfo" />
+          <NavigationProperty Name="OfficeUse" Relationship="IELTSOnlineModel.FK_TestInfo_OfficeUse" FromRole="TestInfo" ToRole="OfficeUse" />
+          <NavigationProperty Name="StudentInfo" Relationship="IELTSOnlineModel.FK_TestInfo_StudentInfo" FromRole="TestInfo" ToRole="StudentInfo" />
+        </EntityType>
+        <Association Name="FK_AddressInfo_TestInfo">
+          <End Type="IELTSOnlineModel.TestInfo" Role="TestInfo" Multiplicity="0..1" />
+          <End Type="IELTSOnlineModel.AddressInfo" Role="AddressInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestInfo">
+              <PropertyRef Name="TestInfoID" />
+            </Principal>
+            <Dependent Role="AddressInfo">
+              <PropertyRef Name="FK_TestInfoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestInfo_OfficeUse">
+          <End Type="IELTSOnlineModel.OfficeUse" Role="OfficeUse" Multiplicity="0..1" />
+          <End Type="IELTSOnlineModel.TestInfo" Role="TestInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OfficeUse">
+              <PropertyRef Name="OfficeUseID" />
+            </Principal>
+            <Dependent Role="TestInfo">
+              <PropertyRef Name="OfficeUseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="StudentInfo">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_AddressID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="IdentityType" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="IdentityValue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CountryNationalCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FirstLanguageCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OccupationSector" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OccupationLevel" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ApplyingCountry" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EnglishLearningLocation" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EducationLevel" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EnglishLearningPeriod" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PermanentDisability" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AddressInfo" Relationship="IELTSOnlineModel.FK_StudentInfo_AddressInfo" FromRole="StudentInfo" ToRole="AddressInfo" />
+          <NavigationProperty Name="TestInfoes" Relationship="IELTSOnlineModel.FK_TestInfo_StudentInfo" FromRole="StudentInfo" ToRole="TestInfo" />
+        </EntityType>
+        <Association Name="FK_StudentInfo_AddressInfo">
+          <End Type="IELTSOnlineModel.AddressInfo" Role="AddressInfo" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="IELTSOnlineModel.StudentInfo" Role="StudentInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AddressInfo">
+              <PropertyRef Name="AddressID" />
+            </Principal>
+            <Dependent Role="StudentInfo">
+              <PropertyRef Name="FK_AddressID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestInfo_StudentInfo">
+          <End Type="IELTSOnlineModel.StudentInfo" Role="StudentInfo" Multiplicity="0..1" />
+          <End Type="IELTSOnlineModel.TestInfo" Role="TestInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentInfo">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="TestInfo">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="IELTSOnlineModelStoreContainer" CdmEntityContainer="IELTSOnlineEntities">
+          <EntitySetMapping Name="AddressInfoes">
+            <EntityTypeMapping TypeName="IELTSOnlineModel.AddressInfo">
+              <MappingFragment StoreEntitySet="AddressInfo">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="ZipOrPostalCode" ColumnName="ZipOrPostalCode" />
+                <ScalarProperty Name="AddressII" ColumnName="AddressII" />
+                <ScalarProperty Name="AddressI" ColumnName="AddressI" />
+                <ScalarProperty Name="FK_TestInfoID" ColumnName="FK_TestInfoID" />
+                <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OfficeUses">
+            <EntityTypeMapping TypeName="IELTSOnlineModel.OfficeUse">
+              <MappingFragment StoreEntitySet="OfficeUse">
+                <ScalarProperty Name="AdministratorInitials" ColumnName="AdministratorInitials" />
+                <ScalarProperty Name="GT" ColumnName="GT" />
+                <ScalarProperty Name="AC" ColumnName="AC" />
+                <ScalarProperty Name="IDChecked" ColumnName="IDChecked" />
+                <ScalarProperty Name="ReceiptNumber" ColumnName="ReceiptNumber" />
+                <ScalarProperty Name="DateofPayment" ColumnName="DateofPayment" />
+                <ScalarProperty Name="TestDate" ColumnName="TestDate" />
+                <ScalarProperty Name="Scheme" ColumnName="Scheme" />
+                <ScalarProperty Name="OfficeUseID" ColumnName="OfficeUseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestInfoes">
+            <EntityTypeMapping TypeName="IELTSOnlineModel.TestInfo">
+              <MappingFragment StoreEntitySet="TestInfo">
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ResultCopyTo" ColumnName="ResultCopyTo" />
+                <ScalarProperty Name="TestReason" ColumnName="TestReason" />
+                <ScalarProperty Name="TestModule" ColumnName="TestModule" />
+                <ScalarProperty Name="TestCityLocation" ColumnName="TestCityLocation" />
+                <ScalarProperty Name="SecondaryTestDate" ColumnName="SecondaryTestDate" />
+                <ScalarProperty Name="PreferredTestDate" ColumnName="PreferredTestDate" />
+                <ScalarProperty Name="OfficeUseID" ColumnName="OfficeUseID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="ReceiptNumber" ColumnName="ReceiptNumber" />
+                <ScalarProperty Name="TestInfoID" ColumnName="TestInfoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentInfoes">
+            <EntityTypeMapping TypeName="IELTSOnlineModel.StudentInfo">
+              <MappingFragment StoreEntitySet="StudentInfo">
+                <ScalarProperty Name="PermanentDisability" ColumnName="PermanentDisability" />
+                <ScalarProperty Name="EnglishLearningPeriod" ColumnName="EnglishLearningPeriod" />
+                <ScalarProperty Name="EducationLevel" ColumnName="EducationLevel" />
+                <ScalarProperty Name="EnglishLearningLocation" ColumnName="EnglishLearningLocation" />
+                <ScalarProperty Name="ApplyingCountry" ColumnName="ApplyingCountry" />
+                <ScalarProperty Name="OccupationLevel" ColumnName="OccupationLevel" />
+                <ScalarProperty Name="OccupationSector" ColumnName="OccupationSector" />
+                <ScalarProperty Name="FirstLanguageCode" ColumnName="FirstLanguageCode" />
+                <ScalarProperty Name="CountryNationalCode" ColumnName="CountryNationalCode" />
+                <ScalarProperty Name="IdentityValue" ColumnName="IdentityValue" />
+                <ScalarProperty Name="IdentityType" ColumnName="IdentityType" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="FK_AddressID" ColumnName="FK_AddressID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

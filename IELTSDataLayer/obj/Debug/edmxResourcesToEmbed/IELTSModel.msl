@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="IELTSOnlineModelStoreContainer" CdmEntityContainer="IELTSOnlineEntities">
+    <EntitySetMapping Name="AddressInfoes">
+      <EntityTypeMapping TypeName="IELTSOnlineModel.AddressInfo">
+        <MappingFragment StoreEntitySet="AddressInfo">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="ZipOrPostalCode" ColumnName="ZipOrPostalCode" />
+          <ScalarProperty Name="AddressII" ColumnName="AddressII" />
+          <ScalarProperty Name="AddressI" ColumnName="AddressI" />
+          <ScalarProperty Name="FK_TestInfoID" ColumnName="FK_TestInfoID" />
+          <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OfficeUses">
+      <EntityTypeMapping TypeName="IELTSOnlineModel.OfficeUse">
+        <MappingFragment StoreEntitySet="OfficeUse">
+          <ScalarProperty Name="AdministratorInitials" ColumnName="AdministratorInitials" />
+          <ScalarProperty Name="GT" ColumnName="GT" />
+          <ScalarProperty Name="AC" ColumnName="AC" />
+          <ScalarProperty Name="IDChecked" ColumnName="IDChecked" />
+          <ScalarProperty Name="ReceiptNumber" ColumnName="ReceiptNumber" />
+          <ScalarProperty Name="DateofPayment" ColumnName="DateofPayment" />
+          <ScalarProperty Name="TestDate" ColumnName="TestDate" />
+          <ScalarProperty Name="Scheme" ColumnName="Scheme" />
+          <ScalarProperty Name="OfficeUseID" ColumnName="OfficeUseID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TestInfoes">
+      <EntityTypeMapping TypeName="IELTSOnlineModel.TestInfo">
+        <MappingFragment StoreEntitySet="TestInfo">
+          <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ResultCopyTo" ColumnName="ResultCopyTo" />
+          <ScalarProperty Name="TestReason" ColumnName="TestReason" />
+          <ScalarProperty Name="TestModule" ColumnName="TestModule" />
+          <ScalarProperty Name="TestCityLocation" ColumnName="TestCityLocation" />
+          <ScalarProperty Name="SecondaryTestDate" ColumnName="SecondaryTestDate" />
+          <ScalarProperty Name="PreferredTestDate" ColumnName="PreferredTestDate" />
+          <ScalarProperty Name="OfficeUseID" ColumnName="OfficeUseID" />
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="ReceiptNumber" ColumnName="ReceiptNumber" />
+          <ScalarProperty Name="TestInfoID" ColumnName="TestInfoID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentInfoes">
+      <EntityTypeMapping TypeName="IELTSOnlineModel.StudentInfo">
+        <MappingFragment StoreEntitySet="StudentInfo">
+          <ScalarProperty Name="PermanentDisability" ColumnName="PermanentDisability" />
+          <ScalarProperty Name="EnglishLearningPeriod" ColumnName="EnglishLearningPeriod" />
+          <ScalarProperty Name="EducationLevel" ColumnName="EducationLevel" />
+          <ScalarProperty Name="EnglishLearningLocation" ColumnName="EnglishLearningLocation" />
+          <ScalarProperty Name="ApplyingCountry" ColumnName="ApplyingCountry" />
+          <ScalarProperty Name="OccupationLevel" ColumnName="OccupationLevel" />
+          <ScalarProperty Name="OccupationSector" ColumnName="OccupationSector" />
+          <ScalarProperty Name="FirstLanguageCode" ColumnName="FirstLanguageCode" />
+          <ScalarProperty Name="CountryNationalCode" ColumnName="CountryNationalCode" />
+          <ScalarProperty Name="IdentityValue" ColumnName="IdentityValue" />
+          <ScalarProperty Name="IdentityType" ColumnName="IdentityType" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="FK_AddressID" ColumnName="FK_AddressID" />
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,132 @@
+﻿@{
+    ViewBag.Title = "Candidate Area";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" id="login">
+    <div class="col-md-12">
+        <h3>Candidate Login</h3>
+        <p>
+            Login in to the candidate area to see your test details.
+        </p>
+        <div class="row">
+            <div class="col-md-3 jumbotron">
+                <form class="form-signin">
+                    @*<h4 class="form-signin-heading">Identification No. (Passport / Emirates ID)</h4>
+                    <label for="inputEmail" class="sr-only">Email address</label>
+                    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                    <h4 class="form-signin-heading">Receipt No.</h4>
+                    <label for="inputPassword" class="sr-only">Password</label>
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="remember-me"> Remember me
+                        </label>
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>*@
+                    <h4 class="form-signin-heading">Identification No. (Passport / Emirates ID)</h4>
+                    <input id="idnumber" class="form-control" autocomplete="off" required autofocus />
+                    <h4 class="form-signin-heading">Receipt No.</h4>
+                    <input type="text" id="receiptnumber" autocomplete="off" class="form-control" required />
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="remember-me"> Remember me
+                        </label>
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block" onclick="getTestDetails()" type="button">Log in</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" id="registerDetails">
+    <div class="col-md-5">
+        <div class="tabbable" id="tabs-830243">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#panel-01" data-toggle="tab">Registration Details</a>
+                </li>
+                <li>
+                    <a href="#panel-02" data-toggle="tab">LRW Test Details</a>
+                </li>
+                <li>
+                    <a href="#panel-03" data-toggle="tab">Speaking Test Details</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="panel-01">
+                    <p>
+                        <ol>
+                            <li>Test Date Registered for : <span id="testdate"></span></li>
+                            <li>Candidate's Full Name : <span id="fullname"></span> </li>
+                            <li>Candidate ID (passport / emirates id) : <span id="candidateid"></span></li>
+                            <li>Receipt No : <span id="receiptno"></span></li>
+                            <li>Date of Birth : <span id="dob"></span></li>
+                            <li>Gender : <span id="gender"></span></li>
+                            <li>Nationality : <span id="nationality"></span></li>
+                            <li>First Language : <span id="firstlanguage"></span></li>
+                        </ol>
+                    </p>
+                </div>
+                <div class="tab-pane" id="panel-02">
+                    <p>
+                        I'm in Section 2.
+                    </p>
+                </div>
+                <div class="tab-pane" id="panel-03">
+                    <p>
+                        I'm in Section 3.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-7">
+        <div class="alert alert-dismissable alert-warning">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                ×
+            </button>
+            If any of your registration details are incorrect, kindly contact the centre you regsistered at or send an email to ielts@hct.ac.ae
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () { $("#registerDetails").hide(); });
+    function getTestDetails() {
+        $.ajax({
+            url: '/RegisterTest/GetTestDetails',
+            dataType: "json",
+            type: "POST",
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify({ identity: $("#idnumber").val(), receiptNumber: $("#receiptnumber").val()}),
+            async: true,
+            processData: false,
+            cache: false,
+            success: function (data) {
+                if (data.indexOf("Candidate information ") > 0) {
+                    alert(data);
+                } else {
+                    $("#registerDetails").show();
+                    $("#login").hide();
+                    var obj = jQuery.parseJSON(data);
+                    $("#testdate").text(obj.TestDate);
+                    $("#fullname").text(obj.FullName);
+                    $("#candidateid").text(obj.IdentityID);
+                    $("#receiptno").text(obj.ReceiptNumber);
+                    $("#dob").text(obj.DOB);
+                    $("#gender").text(obj.Gender);
+                    $("#nationality").text(obj.Nationality);
+                    $("#firstlanguage").text(obj.FirstLanguage);
+                }
+            },
+            error: function (xhr) {
+                alert('error');
+            }
+        })
+    }
+</script>

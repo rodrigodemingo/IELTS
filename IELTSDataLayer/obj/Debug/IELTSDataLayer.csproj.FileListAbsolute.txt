@@ -1,0 +1,12 @@
+D:\Projects\IELTS\IELTS-Portal\IELTSDataLayer\bin\Debug\IELTSDataLayer.dll.config
+D:\Projects\IELTS\IELTS-Portal\IELTSDataLayer\bin\Debug\IELTSDataLayer.dll
+D:\Projects\IELTS\IELTS-Portal\IELTSDataLayer\bin\Debug\IELTSDataLayer.pdb
+D:\Projects\IELTS\IELTS-Portal\IELTSDataLayer\bin\Debug\EntityFramework.dll
+D:\Projects\IELTS\IELTS-Portal\IELTSDataLayer\bin\Debug\EntityFramework.SqlServer.dll
+D:\Projects\IELTS\IELTS-Portal\IELTSDataLayer\bin\Debug\Newtonsoft.Json.dll
+D:\Projects\IELTS\IELTS-Portal\IELTSDataLayer\bin\Debug\EntityFramework.xml
+D:\Projects\IELTS\IELTS-Portal\IELTSDataLayer\bin\Debug\EntityFramework.SqlServer.xml
+D:\Projects\IELTS\IELTS-Portal\IELTSDataLayer\bin\Debug\Newtonsoft.Json.xml
+D:\Projects\IELTS\IELTS-Portal\IELTSDataLayer\obj\Debug\IELTSDataLayer.dll
+D:\Projects\IELTS\IELTS-Portal\IELTSDataLayer\obj\Debug\IELTSDataLayer.pdb
+D:\Projects\IELTS\IELTS-Portal\IELTSDataLayer\obj\Debug\IELTSDataLayer.csprojResolveAssemblyReference.cache

@@ -1,0 +1,384 @@
+﻿@using System.Collections.Generic
+@using System.Web.Mvc
+
+@model IELTSDataLayer.TestInfo
+
+@{
+    ViewBag.Title = "NewApplication";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>NewApplication</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal" id="applicationForm">
+        
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Preferred date of test</label> 
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.PreferredTestDate, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PreferredTestDate)
+            </div>
+            <label class="control-label col-md-2">second choice</label>
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.SecondaryTestDate)
+                @Html.ValidationMessageFor(model => model.SecondaryTestDate)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Test city location</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TestCityLocation)
+                @Html.ValidationMessageFor(model => model.TestCityLocation)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Last name (family name/surname)</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StudentInfo.LastName)
+                @Html.ValidationMessageFor(model => model.StudentInfo.LastName)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Title (Dr/Mr/Mrs/Miss/Ms)</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StudentInfo.Title)
+                @Html.ValidationMessageFor(model => model.StudentInfo.Title)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">First (given) name(s)</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StudentInfo.FirstName)
+                @Html.ValidationMessageFor(model => model.StudentInfo.FirstName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Which IELTS test module are you taking? </label>
+            <div class="col-md-10">
+            @Html.DropDownListFor(model => model.TestModule, new List<SelectListItem> { new SelectListItem { Text = "Academic", Value = "Academic", Selected = true }, new SelectListItem { Text = "General Training", Value = "General Training" } })
+                <br/>
+                These names must be the same as the names on your passport/National Identity Card
+                and must appear in the same order.
+                @Html.ValidationMessageFor(model => model.TestModule)
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Address</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StudentInfo.AddressInfo.AddressI)
+                @Html.EditorFor(model => model.StudentInfo.AddressInfo.AddressII)
+                @Html.ValidationMessageFor(model => model.StudentInfo.LastName)
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Zip or Postal Code</label>
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.StudentInfo.AddressInfo.ZipOrPostalCode)
+                @Html.ValidationMessageFor(model => model.StudentInfo.AddressInfo.ZipOrPostalCode)
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Telephone</label>
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.StudentInfo.AddressInfo.Telephone)
+                @Html.ValidationMessageFor(model => model.StudentInfo.AddressInfo.Telephone)
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Mobile Phone</label>
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.StudentInfo.AddressInfo.MobilePhone)
+                @Html.ValidationMessageFor(model => model.StudentInfo.AddressInfo.MobilePhone)
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Email</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StudentInfo.AddressInfo.Email)<br/>
+                Please provide full and accurate contact information including postal address, phone and mobile number and email which are in constant and valid use.
+                The test centre or the test partner may contact candidates before or after the test to access the full test registration and administration.<br/>
+                @Html.ValidationMessageFor(model => model.StudentInfo.AddressInfo.Email)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Date of Birth</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StudentInfo.DateOfBirth)
+                @Html.ValidationMessageFor(model => model.StudentInfo.DateOfBirth)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Gender</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StudentInfo.Gender)
+                @Html.ValidationMessageFor(model => model.StudentInfo.Gender)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Please indicate which document you will be using as proof of identity and give the number below.
+Candidates taking the test outside their own country must use a current passport.
+You must bring the ID document indicated below to the test. This is the only form of identity that will be accepted on the test day.
+The document must be valid/not expired at registration and on the test day.</label>
+            <div class="col-md-3">
+                @Html.DropDownListFor(model => model.StudentInfo.IdentityType, new List<SelectListItem> { new SelectListItem { Text = "Passport", Value = "Passport", Selected = true }, new SelectListItem { Text = "National ID", Value = "National ID" } })
+                @Html.EditorFor(model => model.StudentInfo.IdentityValue)
+            </div>
+        </div>
+
+    
+        @*<div class="form-group">
+            <label class="control-label col-md-2">Scheme</label>
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.OfficeUse.Scheme)
+                @Html.ValidationMessageFor(model => model.OfficeUse.Scheme)
+            </div>
+        </div>
+    
+    
+        <div class="form-group">
+            <label class="control-label col-md-2">Test Date</label>
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.OfficeUse.TestDate)
+                @Html.ValidationMessageFor(model => model.OfficeUse.TestDate)
+            </div>
+        </div>
+    
+    
+        <div class="form-group">
+            <label class="control-label col-md-2">Date of payment</label>
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.OfficeUse.DateofPayment)
+                @Html.ValidationMessageFor(model => model.OfficeUse.DateofPayment)
+            </div>
+        </div>
+    
+    
+        <div class="form-group">
+            <label class="control-label col-md-2">Receipt Number</label>
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.OfficeUse.ReceiptNumber)
+                @Html.ValidationMessageFor(model => model.OfficeUse.ReceiptNumber)
+            </div>
+        </div>
+    
+    
+        <div class="form-group">
+            <label class="control-label col-md-2">ID Checked</label>
+            <div class="col-md-3">
+                ID - @Html.EditorFor(model => model.OfficeUse.IDChecked)
+                @Html.ValidationMessageFor(model => model.OfficeUse.IDChecked)
+                AC - @Html.EditorFor(model => model.OfficeUse.AC)
+                @Html.ValidationMessageFor(model => model.OfficeUse.AC)
+                GT - @Html.EditorFor(model => model.OfficeUse.GT)
+                @Html.ValidationMessageFor(model => model.OfficeUse.GT)
+                
+            </div>
+        </div>
+    
+    
+        <div class="form-group">
+            <label class="control-label col-md-2">Administrator's Initials</label>
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.OfficeUse.AdministratorInitials)
+                @Html.ValidationMessageFor(model => model.OfficeUse.AdministratorInitials)
+            </div>
+        </div>*@
+    
+    
+        <div class="form-group">
+            <label class="control-label col-md-2">Country of Nationality</label>
+            <div class="col-md-3">
+                @Html.DropDownListFor(model => model.StudentInfo.CountryNationalCode, new List<SelectListItem> { new SelectListItem { Value = "Afghanistan", Text = "Afghanistan" }, new SelectListItem { Value = "Åland Islands", Text = "Åland Islands" }, new SelectListItem { Value = "Albania", Text = "Albania" } })
+                @Html.ValidationMessageFor(model => model.StudentInfo.CountryNationalCode)
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <label class="control-label col-md-2">First language</label>
+            <div class="col-md-3">
+                @Html.DropDownListFor(model => model.StudentInfo.FirstLanguageCode, new List<SelectListItem> { new SelectListItem { Value = "Arabic", Text = "Arabic" }, new SelectListItem { Value = "Spanish", Text = "Spanish" }, new SelectListItem { Value = "English", Text = "English" } })
+                @Html.ValidationMessageFor(model => model.StudentInfo.FirstLanguageCode)
+            </div>
+        </div>
+    
+    
+        <div class="form-group">
+            <label class="control-label col-md-2">Occupation (sector)</label>
+            <div class="col-md-3">
+                @Html.DropDownListFor(model => model.StudentInfo.OccupationSector, new List<SelectListItem> { new SelectListItem { Text = "Administrative Services", Value = "Administrative Services" }, new SelectListItem { Text = "Agriculture, Fishing, Forestry, Mining", Value = "Agriculture, Fishing, Forestry, Mining" }, new SelectListItem { Text = "Arts and Entertainment", Value = "Arts and Entertainment" } })
+                @Html.ValidationMessageFor(model => model.StudentInfo.OccupationSector)
+            </div>
+        </div>
+    
+    
+        <div class="form-group">
+            <label class="control-label col-md-2">Occupation (level)</label>
+            <div class="col-md-3">
+                @Html.DropDownListFor(model => model.StudentInfo.OccupationLevel, new List<SelectListItem> { new SelectListItem { Text = "Self-employed", Value = "Self-employed" }, new SelectListItem { Text = "Employer/Partner", Value = "Employer/Partner" }, new SelectListItem { Text = "Employee (Senior level)", Value = "Employee (Senior level)" } })
+                @Html.ValidationMessageFor(model => model.StudentInfo.OccupationLevel)
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <label class="control-label col-md-2">Why are you taking the test?</label>
+            <div class="col-md-3">
+                @Html.DropDownListFor(model => model.TestReason, new List<SelectListItem> { new SelectListItem { Text = "For higher education extended course (three months or more)", Value = "For higher education extended course (three months or more)" }, new SelectListItem { Text = "For higher education short course (three months or less)", Value = "For higher education short course (three months or less)" }, new SelectListItem { Text = "For other education purposes", Value = "For other education purposes" } })
+                @Html.ValidationMessageFor(model => model.TestReason)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Which country are you applying to/intending to go to?</label>
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.StudentInfo.ApplyingCountry)
+                @Html.ValidationMessageFor(model => model.StudentInfo.ApplyingCountry)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Where are you currently studying English (if applicable)?</label>
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.StudentInfo.EnglishLearningLocation)
+                @Html.ValidationMessageFor(model => model.StudentInfo.EnglishLearningLocation)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">What level of education have you completed?</label>
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.StudentInfo.EducationLevel)
+                @Html.ValidationMessageFor(model => model.StudentInfo.EducationLevel)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">How many years have you been studying English?</label>
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.StudentInfo.EnglishLearningPeriod)
+                @Html.ValidationMessageFor(model => model.StudentInfo.EnglishLearningPeriod)
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <label class="control-label col-md-2">Do you have a permanent disability, such as a visual, hearing or specific learning difficulty, which requires special
+arrangements (for example, modified material, extra time, use of technology, etc.)?</label>
+            <div class="col-md-3">
+                @Html.DropDownListFor(model => model.StudentInfo.PermanentDisability, new List<SelectListItem> { new SelectListItem { Text = "Yes", Value = "Yes", Selected = true }, new SelectListItem { Text = "No", Value = "No" } })
+                @Html.ValidationMessageFor(model => model.StudentInfo.EnglishLearningPeriod)
+            </div>
+        </div>
+    
+    <div class="form-group">
+            <label class="control-label col-md-2">How many years have you been studying English?</label>
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.StudentInfo.EnglishLearningPeriod)
+                @Html.ValidationMessageFor(model => model.StudentInfo.EnglishLearningPeriod)
+            </div>
+        </div>
+    
+    
+    
+        <div class="form-group">
+            @Html.LabelFor(model => model.ResultCopyTo, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ResultCopyTo)
+                @Html.ValidationMessageFor(model => model.ResultCopyTo)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Status)
+                @Html.ValidationMessageFor(model => model.Status)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreatedDate, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CreatedDate)
+                @Html.ValidationMessageFor(model => model.CreatedDate)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ModifiedDateTime, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ModifiedDateTime)
+                @Html.ValidationMessageFor(model => model.ModifiedDateTime)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    
+    <div id="loading">
+        @*<h5>Loading . . .</h5>*@
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script type="text/javascript">
+
+    function onAJAXBegin() {
+        $("#applicationForm").hide();
+        $("#loading").show();
+
+    }
+    function onAJAXSuccess(data) {
+        $("#applicationForm").show();
+        $("#loading").hide();
+        alert(JSON.stringify(data));
+    }
+    function onAJAXFailure() {
+        $("#applicationForm").show();
+        $("#loading").hide();
+    }
+</script>

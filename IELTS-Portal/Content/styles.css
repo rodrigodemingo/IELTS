@@ -1,0 +1,84 @@
+.nav-pills>li.active>a {
+    background-color: #c4554f;
+}
+
+.card {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    padding: 10px;
+}
+
+.tabs-bgn {
+    -moz-border-radius-topleft: 15px;
+    -webkit-border-top-left-radius: 15px;
+    border-top-left-radius: 15px;
+    -moz-border-radius-topright: 15px;
+    -webkit-border-top-right-radius: 15px;
+    border-top-right-radius: 15px;
+    width: 160px;
+    height: 50px;
+    border: 2px solid white;
+}
+.tabs-bgn-1 {
+	background-color: #4a8daf;
+}
+.tabs-bgn-2 {
+	background-color: #5d8395;
+}
+.tabs-bgn-3 {
+	background-color: #204c62;
+}
+.tabs-bgn-4 {
+	background-color: #622920;
+}
+.tabs-bgn-5 {
+	background-color: #bc5546;
+}
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.navigation {
+background-color: #4a8daf;
+}
+.navigation .nav > li > a {
+    color: #fff;
+    margin-top: 5px;
+}
+.navigation .nav > li > a:hover, 
+.navigation .nav > li > a:focus {
+    color: #000;
+}
+.intro-text p {
+margin: 1.25em 0;
+text-align: justify;
+}
+.panel-danger .btn-group {
+    margin-bottom: 5px;
+}
+.container-fluid {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.carousel.slide {
+  margin-right: -15px;
+}
+.tabs-bgn {
+  color: #fff;
+  text-align: center;
+}
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus {
+   background-color: #EEEEEE;
+}
+.tab-content {
+  border: 1px solid #ddd;
+  background-color: #EEEEEE;
+}
+.well {
+  font-size: 16px;
+  height: 300px;
+  line-height: 30px;
+}

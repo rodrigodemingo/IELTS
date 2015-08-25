@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="IELTSOnlineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AddressInfo">
+    <Key>
+      <PropertyRef Name="AddressID" />
+    </Key>
+    <Property Name="AddressID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_TestInfoID" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="AddressI" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="AddressII" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="ZipOrPostalCode" Type="nvarchar" MaxLength="12" Nullable="false" />
+    <Property Name="Telephone" Type="nvarchar" MaxLength="14" />
+    <Property Name="MobilePhone" Type="nvarchar" MaxLength="14" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OfficeUse">
+    <Key>
+      <PropertyRef Name="OfficeUseID" />
+    </Key>
+    <Property Name="OfficeUseID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Scheme" Type="nvarchar" MaxLength="255" />
+    <Property Name="TestDate" Type="date" />
+    <Property Name="DateofPayment" Type="datetime" />
+    <Property Name="ReceiptNumber" Type="nvarchar" MaxLength="255" />
+    <Property Name="IDChecked" Type="bit" />
+    <Property Name="AC" Type="bit" />
+    <Property Name="GT" Type="bit" />
+    <Property Name="AdministratorInitials" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="StudentInfo">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_AddressID" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="255" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="255" />
+    <Property Name="DateOfBirth" Type="date" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="14" />
+    <Property Name="IdentityType" Type="nvarchar" MaxLength="12" />
+    <Property Name="IdentityValue" Type="nvarchar" MaxLength="50" />
+    <Property Name="CountryNationalCode" Type="nvarchar" MaxLength="255" />
+    <Property Name="FirstLanguageCode" Type="nvarchar" MaxLength="255" />
+    <Property Name="OccupationSector" Type="nvarchar" MaxLength="255" />
+    <Property Name="OccupationLevel" Type="nvarchar" MaxLength="255" />
+    <Property Name="ApplyingCountry" Type="nvarchar" MaxLength="255" />
+    <Property Name="EnglishLearningLocation" Type="nvarchar" MaxLength="255" />
+    <Property Name="EducationLevel" Type="nvarchar" MaxLength="255" />
+    <Property Name="EnglishLearningPeriod" Type="nvarchar" MaxLength="255" />
+    <Property Name="PermanentDisability" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="TestInfo">
+    <Key>
+      <PropertyRef Name="TestInfoID" />
+    </Key>
+    <Property Name="TestInfoID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReceiptNumber" Type="nvarchar" MaxLength="24" />
+    <Property Name="StudentID" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="OfficeUseID" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="PreferredTestDate" Type="date" />
+    <Property Name="SecondaryTestDate" Type="date" />
+    <Property Name="TestCityLocation" Type="nvarchar" MaxLength="255" />
+    <Property Name="TestModule" Type="nvarchar" MaxLength="255" />
+    <Property Name="TestReason" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="ResultCopyTo" Type="bit" />
+    <Property Name="Status" Type="tinyint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDateTime" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_AddressInfo_TestInfo">
+    <End Role="TestInfo" Type="Self.TestInfo" Multiplicity="0..1" />
+    <End Role="AddressInfo" Type="Self.AddressInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TestInfo">
+        <PropertyRef Name="TestInfoID" />
+      </Principal>
+      <Dependent Role="AddressInfo">
+        <PropertyRef Name="FK_TestInfoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentInfo_AddressInfo">
+    <End Role="AddressInfo" Type="Self.AddressInfo" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="StudentInfo" Type="Self.StudentInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AddressInfo">
+        <PropertyRef Name="AddressID" />
+      </Principal>
+      <Dependent Role="StudentInfo">
+        <PropertyRef Name="FK_AddressID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TestInfo_OfficeUse">
+    <End Role="OfficeUse" Type="Self.OfficeUse" Multiplicity="0..1" />
+    <End Role="TestInfo" Type="Self.TestInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OfficeUse">
+        <PropertyRef Name="OfficeUseID" />
+      </Principal>
+      <Dependent Role="TestInfo">
+        <PropertyRef Name="OfficeUseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TestInfo_StudentInfo">
+    <End Role="StudentInfo" Type="Self.StudentInfo" Multiplicity="0..1" />
+    <End Role="TestInfo" Type="Self.TestInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudentInfo">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="TestInfo">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="IELTSOnlineModelStoreContainer">
+    <EntitySet Name="AddressInfo" EntityType="Self.AddressInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OfficeUse" EntityType="Self.OfficeUse" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentInfo" EntityType="Self.StudentInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TestInfo" EntityType="Self.TestInfo" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AddressInfo_TestInfo" Association="Self.FK_AddressInfo_TestInfo">
+      <End Role="TestInfo" EntitySet="TestInfo" />
+      <End Role="AddressInfo" EntitySet="AddressInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentInfo_AddressInfo" Association="Self.FK_StudentInfo_AddressInfo">
+      <End Role="AddressInfo" EntitySet="AddressInfo" />
+      <End Role="StudentInfo" EntitySet="StudentInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TestInfo_OfficeUse" Association="Self.FK_TestInfo_OfficeUse">
+      <End Role="OfficeUse" EntitySet="OfficeUse" />
+      <End Role="TestInfo" EntitySet="TestInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TestInfo_StudentInfo" Association="Self.FK_TestInfo_StudentInfo">
+      <End Role="StudentInfo" EntitySet="StudentInfo" />
+      <End Role="TestInfo" EntitySet="TestInfo" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

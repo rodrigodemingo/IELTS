@@ -1,0 +1,14 @@
+D:\Projects\IELTS\IELTS-Portal\IELTSTest-Console\bin\Debug\IELTSTest-Console.exe.config
+D:\Projects\IELTS\IELTS-Portal\IELTSTest-Console\bin\Debug\IELTSTest-Console.exe
+D:\Projects\IELTS\IELTS-Portal\IELTSTest-Console\bin\Debug\IELTSTest-Console.pdb
+D:\Projects\IELTS\IELTS-Portal\IELTSTest-Console\bin\Debug\IELTSDataLayer.dll
+D:\Projects\IELTS\IELTS-Portal\IELTSTest-Console\bin\Debug\EntityFramework.dll
+D:\Projects\IELTS\IELTS-Portal\IELTSTest-Console\bin\Debug\Newtonsoft.Json.dll
+D:\Projects\IELTS\IELTS-Portal\IELTSTest-Console\bin\Debug\IELTSDataLayer.pdb
+D:\Projects\IELTS\IELTS-Portal\IELTSTest-Console\bin\Debug\EntityFramework.xml
+D:\Projects\IELTS\IELTS-Portal\IELTSTest-Console\bin\Debug\Newtonsoft.Json.xml
+D:\Projects\IELTS\IELTS-Portal\IELTSTest-Console\obj\Debug\IELTSTest-Console.csprojResolveAssemblyReference.cache
+D:\Projects\IELTS\IELTS-Portal\IELTSTest-Console\obj\Debug\IELTSTest-Console.exe
+D:\Projects\IELTS\IELTS-Portal\IELTSTest-Console\obj\Debug\IELTSTest-Console.pdb
+D:\Projects\IELTS\IELTS-Portal\IELTSTest-Console\bin\Debug\EntityFramework.SqlServer.dll
+D:\Projects\IELTS\IELTS-Portal\IELTSTest-Console\bin\Debug\EntityFramework.SqlServer.xml
